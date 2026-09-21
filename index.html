@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="description"
+        content="Descubre qué tan compatibles son tú y tu pareja. 💕"
+    >
+
+    <title>Compatibles 💘</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Decoración flotante -->
+    <div class="floating-hearts">
+        <span>💕</span>
+        <span>✨</span>
+        <span>💘</span>
+        <span>♡</span>
+        <span>✨</span>
+        <span>💕</span>
+    </div>
+
+
+    <main class="container">
+
+        <!-- =========================
+             PANTALLA PRINCIPAL
+        ========================== -->
+
+        <section id="home" class="screen active">
+
+            <div class="logo">
+                💘
+            </div>
+
+            <h1>
+                ¿Qué tan<br>
+                <span>compatibles</span> somos?
+            </h1>
+
+            <p class="subtitle">
+                Pon sus nombres y descubre<br>
+                qué dice nuestro algoritmo sobre ustedes 👀
+            </p>
+
+
+            <div class="card">
+
+                <div class="input-group">
+
+                    <label for="name1">
+                        👤 Tu nombre
+                    </label>
+
+                    <input
+                        type="text"
+                        id="name1"
+                        placeholder="Escribe tu nombre..."
+                        maxlength="30"
+                        autocomplete="off"
+                    >
+
+                </div>
+
+
+                <div class="heart-divider">
+                    ❤️
+                </div>
+
+
+                <div class="input-group">
+
+                    <label for="name2">
+                        💕 Nombre de tu pareja
+                    </label>
+
+                    <input
+                        type="text"
+                        id="name2"
+                        placeholder="Escribe su nombre..."
+                        maxlength="30"
+                        autocomplete="off"
+                    >
+
+                </div>
+
+
+                <p id="error-message" class="error-message"></p>
+
+
+                <button id="calculate-btn" class="main-button">
+                    💘 DESCUBRIR COMPATIBILIDAD
+                </button>
+
+            </div>
+
+
+            <p class="little-text">
+                ✨ Es solo por diversión... ¿o será que el algoritmo sabe demasiado? 👀
+            </p>
+
+        </section>
+
+
+        <!-- =========================
+             PANTALLA DE CARGA
+        ========================== -->
+
+        <section id="loading" class="screen">
+
+            <div class="loading-heart">
+                💗
+            </div>
+
+            <h2>
+                Analizando su conexión...
+            </h2>
+
+            <p id="loading-text">
+                Consultando al algoritmo del amor 👀
+            </p>
+
+            <div class="loading-bar">
+
+                <div id="loading-progress"></div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             PANTALLA DE RESULTADO
+        ========================== -->
+
+        <section id="result" class="screen">
+
+            <div class="result-card">
+
+                <p class="result-label">
+                    💘 RESULTADO
+                </p>
+
+
+                <h2 id="couple-names">
+                    Lorenna ❤️ Bryan
+                </h2>
+
+
+                <div class="main-score">
+
+                    <span id="compatibility-score">
+                        87%
+                    </span>
+
+                    <span>
+                        COMPATIBILIDAD
+                    </span>
+
+                </div>
+
+
+                <!-- Estadísticas -->
+
+                <div class="stats">
+
+                    <div class="stat">
+
+                        <div class="stat-icon">
+                            🔥
+                        </div>
+
+                        <div class="stat-info">
+
+                            <p>Química</p>
+
+                            <div class="progress">
+                                <div id="chemistry-bar"></div>
+                            </div>
+
+                        </div>
+
+                        <strong id="chemistry">
+                            94%
+                        </strong>
+
+                    </div>
+
+
+                    <div class="stat">
+
+                        <div class="stat-icon">
+                            😂
+                        </div>
+
+                        <div class="stat-info">
+
+                            <p>Diversión</p>
+
+                            <div class="progress">
+                                <div id="fun-bar"></div>
+                            </div>
+
+                        </div>
+
+                        <strong id="fun">
+                            82%
+                        </strong>
+
+                    </div>
+
+
+                    <div class="stat">
+
+                        <div class="stat-icon">
+                            🧠
+                        </div>
+
+                        <div class="stat-info">
+
+                            <p>Conexión</p>
+
+                            <div class="progress">
+                                <div id="connection-bar"></div>
+                            </div>
+
+                        </div>
+
+                        <strong id="connection">
+                            91%
+                        </strong>
+
+                    </div>
+
+
+                    <div class="stat">
+
+                        <div class="stat-icon">
+                            💢
+                        </div>
+
+                        <div class="stat-info">
+
+                            <p>Caos</p>
+
+                            <div class="progress">
+                                <div id="chaos-bar"></div>
+                            </div>
+
+                        </div>
+
+                        <strong id="chaos">
+                            76%
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Mensaje -->
+
+                <div class="result-message">
+
+                    <div class="message-icon">
+                        ✨
+                    </div>
+
+                    <p id="result-message">
+                        Demasiado compatibles para ser normales. 💘
+                    </p>
+
+                </div>
+
+
+                <!-- Botones -->
+
+                <button id="share-btn" class="main-button">
+                    📸 COMPARTIR MI RESULTADO
+                </button>
+
+
+                <button id="again-btn" class="secondary-button">
+                    🔄 Probar con otros nombres
+                </button>
+
+            </div>
+
+
+            <!-- Mini llamada a la acción -->
+
+            <p class="challenge-text">
+                👀 ¿Será verdad?
+                <strong>Hazlo con tu crush.</strong>
+            </p>
+
+        </section>
+
+
+        <!-- =========================
+             CONTADORES
+        ========================== -->
+
+        <footer class="counters">
+
+            <div>
+                👀
+                <strong id="visitors">
+                    1,247
+                </strong>
+                visitantes
+            </div>
+
+            <div>
+                💕
+                <strong id="tests">
+                    863
+                </strong>
+                tests
+            </div>
+
+        </footer>
+
+    </main>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
