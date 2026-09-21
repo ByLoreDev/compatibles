@@ -15,6 +15,10 @@ const SUPABASE_KEY = "sb_publishable_3VjVpPcgHCRgByTuxhOWvw_s5YDu8Nu";
 // CONTADORES SUPABASE
 // ================================
 
+// ================================
+// CONTADORES SUPABASE
+// ================================
+
 async function getStats() {
     try {
         const response = await fetch(
@@ -48,11 +52,11 @@ async function getStats() {
 }
 
 
-// Registrar una visita
+// Registrar visitante
 async function registerVisitor() {
     try {
-        // Evita contar varias veces durante la misma sesión
         if (sessionStorage.getItem("compatibles_visit")) {
+            await getStats();
             return;
         }
 
@@ -83,7 +87,7 @@ async function registerVisitor() {
 }
 
 
-// Registrar un test
+// Registrar test
 async function registerTest() {
     try {
         const response = await fetch(
