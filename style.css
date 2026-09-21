@@ -880,4 +880,304 @@ h1 span {
         font-size: 46px;
     }
 
+    /* =========================================
+   📱 MOBILE FIRST - COMPATIBLES
+========================================= */
+
+/* Evita desbordamientos en celulares */
+html,
+body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+
+/* El contenedor aprovecha mejor el celular */
+.container {
+    width: 100%;
+    max-width: 520px;
+    min-height: 100vh;
+
+    padding: 24px 16px 22px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* =========================================
+   💘 PORTADA
+========================================= */
+
+.logo {
+    width: 64px;
+    height: 64px;
+
+    margin-bottom: 15px;
+
+    font-size: 32px;
+}
+
+h1 {
+    font-size: clamp(2.15rem, 11vw, 3.4rem);
+    line-height: 0.98;
+    letter-spacing: -1.8px;
+
+    margin-bottom: 14px;
+}
+
+.subtitle {
+    max-width: 330px;
+
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 23px;
+
+    font-size: 14px;
+}
+
+
+/* =========================================
+   💕 TARJETA DE DATOS
+========================================= */
+
+.card {
+    width: 100%;
+
+    padding: 22px 18px;
+
+    border-radius: 25px;
+}
+
+
+/* Inputs cómodos para dedos */
+.input-group input {
+    min-height: 52px;
+
+    padding: 14px 15px;
+
+    font-size: 16px;
+}
+
+
+/* =========================================
+   ❤️ CORAZÓN
+========================================= */
+
+.heart-divider {
+    margin: 10px 0;
+
+    font-size: 22px;
+}
+
+
+/* =========================================
+   💘 BOTÓN
+========================================= */
+
+.main-button {
+    min-height: 52px;
+
+    margin-top: 18px;
+
+    padding: 14px 12px;
+
+    font-size: 13px;
+}
+
+
+/* =========================================
+   ✨ TEXTO INFERIOR
+========================================= */
+
+.little-text {
+    max-width: 310px;
+
+    margin-left: auto;
+    margin-right: auto;
+
+    font-size: 11px;
+}
+
+
+/* =========================================
+   💕 ICONOS DECORATIVOS
+========================================= */
+
+.floating-hearts span {
+    font-size: 18px;
+}
+
+
+/* Evitamos que los adornos queden encima
+   de los elementos importantes */
+
+.floating-hearts span:nth-child(1) {
+    left: 5%;
+    top: 15%;
+}
+
+.floating-hearts span:nth-child(2) {
+    right: 5%;
+    top: 10%;
+}
+
+.floating-hearts span:nth-child(3) {
+    left: 3%;
+    top: 48%;
+}
+
+.floating-hearts span:nth-child(4) {
+    right: 4%;
+    top: 55%;
+}
+
+.floating-hearts span:nth-child(5) {
+    left: 10%;
+    top: 80%;
+}
+
+.floating-hearts span:nth-child(6) {
+    right: 10%;
+    top: 78%;
+}
+
+
+/* =========================================
+   👀 CONTADORES
+========================================= */
+
+.counters {
+    width: 100%;
+
+    flex-wrap: wrap;
+
+    gap: 10px 18px;
+
+    margin-top: 18px;
+
+    font-size: 10px;
+}
+
+
+/* =========================================
+   💗 RESULTADO EN CELULAR
+========================================= */
+
+.result-card {
+    width: 100%;
+
+    padding: 22px 16px;
+
+    border-radius: 25px;
+}
+
+#couple-names {
+    font-size: clamp(20px, 6vw, 26px);
+
+    line-height: 1.2;
+}
+
+.main-score {
+    width: 165px;
+    height: 165px;
+
+    margin: 20px auto;
+}
+
+#compatibility-score {
+    font-size: 45px;
+}
+
+.stats {
+    gap: 12px;
+}
+
+.stat {
+    gap: 9px;
+}
+
+.stat-icon {
+    width: 38px;
+    height: 38px;
+
+    font-size: 18px;
+}
+
+.stat strong {
+    width: 40px;
+
+    font-size: 13px;
+}
+
+.result-message {
+    padding: 13px;
+
+    margin-top: 20px;
+}
+
+.result-message p {
+    font-size: 12px;
+}
+
+.challenge-text {
+    font-size: 12px;
+}
+
+
+/* =========================================
+   📱 CELULARES PEQUEÑOS
+========================================= */
+
+@media (max-width: 360px) {
+
+    .container {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    .card {
+        padding: 20px 15px;
+    }
+
+    .main-score {
+        width: 150px;
+        height: 150px;
+    }
+
+    #compatibility-score {
+        font-size: 41px;
+    }
+
+    .stat-info p {
+        font-size: 11px;
+    }
+}
+
+
+/* =========================================
+   💻 TABLETS Y PC
+========================================= */
+
+@media (min-width: 768px) {
+
+    .container {
+        padding-top: 45px;
+        padding-bottom: 35px;
+    }
+
+    h1 {
+        font-size: 3.2rem;
+    }
+
+    .card {
+        padding: 30px 25px;
+    }
+}
+
 }
