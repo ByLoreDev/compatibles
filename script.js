@@ -1,13 +1,25 @@
 /* =========================================
    💘 COMPATIBLES
-   Algoritmo de compatibilidad
+   Algoritmo// ================================
+// SUPABASE
+// ================================
+
+const SUPABASE_URL = "https://cukldolycpihymfurqvp.supabase.co";
+
+const SUPABASE_KEY = "sb_publishable_3VjVpPcgHCRgByTuxhOWvw_s5YDu8Nu";de compatibilidad
 ========================================= */
 
 
-// =========================================
-// ELEMENTOS DEL HTML
-// =========================================
 
+// ================================
+// SUPABASE
+// ================================
+
+const SUPABASE_URL = "https://cukldolycpihymfurqvp.supabase.co";
+
+const SUPABASE_KEY = "sb_publishable_3VjVpPcgHCRgByTuxhOWvw_s5YDu8Nu";
+
+// ELEMENTOS DEL HTML
 const homeScreen = document.getElementById("home");
 const loadingScreen = document.getElementById("loading");
 const resultScreen = document.getElementById("result");
