@@ -1,16 +1,8 @@
 /* =========================================
    💘 COMPATIBLES
    Algoritmo// ================================
-// SUPABASE
-// ================================
 
-const SUPABASE_URL = "https://cukldolycpihymfurqvp.supabase.co";
-
-const SUPABASE_KEY = "sb_publishable_3VjVpPcgHCRgByTuxhOWvw_s5YDu8Nu";de compatibilidad
-========================================= */
-
-
-
+ */
 // ================================
 // SUPABASE
 // ================================
@@ -19,10 +11,113 @@ const SUPABASE_URL = "https://cukldolycpihymfurqvp.supabase.co";
 
 const SUPABASE_KEY = "sb_publishable_3VjVpPcgHCRgByTuxhOWvw_s5YDu8Nu";
 
+// ================================
+// CONTADORES SUPABASE
+// ================================
+
+async function getStats() {
+    try {
+        const response = await fetch(
+            `${SUPABASE_URL}/rest/v1/stats?id=eq.1&select=visitors,tests`,
+            {
+                method: "GET",
+                headers: {
+                    "apikey": SUPABASE_KEY,
+                    "Authorization": `Bearer ${SUPABASE_KEY}`
+                }
+            }
+        );
+
+        if (!response.ok) {
+            throw new Error("No se pudieron obtener los contadores");
+        }
+
+        const data = await response.json();
+
+        if (data.length > 0) {
+            document.getElementById("visitors").textContent =
+                data[0].visitors.toLocaleString("es-PE");
+
+            document.getElementById("tests").textContent =
+                data[0].tests.toLocaleString("es-PE");
+        }
+
+    } catch (error) {
+        console.error("Error cargando estadísticas:", error);
+    }
+}
+
+
+// Registrar una visita
+async function registerVisitor() {
+    try {
+        // Evita contar varias veces durante la misma sesión
+        if (sessionStorage.getItem("compatibles_visit")) {
+            return;
+        }
+
+        const response = await fetch(
+            `${SUPABASE_URL}/rest/v1/rpc/increment_visitors`,
+            {
+                method: "POST",
+                headers: {
+                    "apikey": SUPABASE_KEY,
+                    "Authorization": `Bearer ${SUPABASE_KEY}`,
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({})
+            }
+        );
+
+        if (!response.ok) {
+            throw new Error("No se pudo registrar la visita");
+        }
+
+        sessionStorage.setItem("compatibles_visit", "true");
+
+        await getStats();
+
+    } catch (error) {
+        console.error("Error registrando visita:", error);
+    }
+}
+
+
+// Registrar un test
+async function registerTest() {
+    try {
+        const response = await fetch(
+            `${SUPABASE_URL}/rest/v1/rpc/increment_tests`,
+            {
+                method: "POST",
+                headers: {
+                    "apikey": SUPABASE_KEY,
+                    "Authorization": `Bearer ${SUPABASE_KEY}`,
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({})
+            }
+        );
+
+        if (!response.ok) {
+            throw new Error("No se pudo registrar el test");
+        }
+
+        await getStats();
+
+    } catch (error) {
+        console.error("Error registrando test:", error);
+    }
+}
+
 // ELEMENTOS DEL HTML
 const homeScreen = document.getElementById("home");
 const loadingScreen = document.getElementById("loading");
 const resultScreen = document.getElementById("result");
+
+// Cargar y registrar estadísticas
+getStats();
+registerVisitor(); 
 
 const name1Input = document.getElementById("name1");
 const name2Input = document.getElementById("name2");
@@ -538,6 +633,8 @@ calculateBtn.addEventListener(
                 name1,
                 name2
             );
+
+            registerTest();
 
 
         startLoading(() => {
