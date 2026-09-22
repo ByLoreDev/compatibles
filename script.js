@@ -676,79 +676,586 @@ againBtn.addEventListener(
 
 
 // =========================================
-// COMPARTIR RESULTADO
+// GENERAR IMAGEN DEL RESULTADO
+// =========================================
+
+async function generateResultImage(
+    name1,
+    name2,
+    results
+) {
+
+    const canvas =
+        document.createElement("canvas");
+
+    canvas.width = 1080;
+    canvas.height = 1920;
+
+    const ctx =
+        canvas.getContext("2d");
+
+    // =========================================
+    // FONDO
+    // =========================================
+
+    const gradient =
+        ctx.createLinearGradient(
+            0,
+            0,
+            1080,
+            1920
+        );
+
+    gradient.addColorStop(
+        0,
+        "#ffd6e7"
+    );
+
+    gradient.addColorStop(
+        0.5,
+        "#f3d9ff"
+    );
+
+    gradient.addColorStop(
+        1,
+        "#d9e4ff"
+    );
+
+    ctx.fillStyle = gradient;
+
+    ctx.fillRect(
+        0,
+        0,
+        1080,
+        1920
+    );
+
+
+    // =========================================
+    // DECORACIÓN
+    // =========================================
+
+    ctx.font =
+        "80px Arial";
+
+    ctx.textAlign =
+        "center";
+
+    ctx.fillText(
+        "💕",
+        150,
+        180
+    );
+
+    ctx.fillText(
+        "💘",
+        930,
+        180
+    );
+
+    ctx.font =
+        "55px Arial";
+
+    ctx.fillText(
+        "✨",
+        120,
+        500
+    );
+
+    ctx.fillText(
+        "✨",
+        960,
+        700
+    );
+
+
+    // =========================================
+    // TÍTULO
+    // =========================================
+
+    ctx.fillStyle =
+        "#8d3c68";
+
+    ctx.font =
+        "bold 70px Arial";
+
+    ctx.fillText(
+        "COMPATIBLES",
+        540,
+        300
+    );
+
+
+    // =========================================
+    // NOMBRES
+    // =========================================
+
+    ctx.fillStyle =
+        "#333333";
+
+    ctx.font =
+        "bold 55px Arial";
+
+    ctx.fillText(
+        `${name1} ❤️ ${name2}`,
+        540,
+        450
+    );
+
+
+    // =========================================
+    // PORCENTAJE
+    // =========================================
+
+    ctx.fillStyle =
+        "#d63384";
+
+    ctx.font =
+        "bold 190px Arial";
+
+    ctx.fillText(
+        `${results.compatibility}%`,
+        540,
+        720
+    );
+
+
+    ctx.fillStyle =
+        "#555555";
+
+    ctx.font =
+        "bold 42px Arial";
+
+    ctx.fillText(
+        "DE COMPATIBILIDAD",
+        540,
+        790
+    );
+
+
+    // =========================================
+    // MENSAJE
+    // =========================================
+
+    ctx.fillStyle =
+        "#444444";
+
+    ctx.font =
+        "32px Arial";
+
+    const message =
+        getMessage(
+            results.compatibility
+        );
+
+    drawWrappedText(
+        ctx,
+        message,
+        540,
+        900,
+        850,
+        48
+    );
+
+
+    // =========================================
+    // MÉTRICAS
+    // =========================================
+
+    drawMetric(
+        ctx,
+        "🔥",
+        "Química",
+        results.chemistry,
+        540,
+        1110
+    );
+
+    drawMetric(
+        ctx,
+        "😂",
+        "Diversión",
+        results.fun,
+        540,
+        1230
+    );
+
+    drawMetric(
+        ctx,
+        "🧠",
+        "Conexión",
+        results.connection,
+        540,
+        1350
+    );
+
+    drawMetric(
+        ctx,
+        "💢",
+        "Caos",
+        results.chaos,
+        540,
+        1470
+    );
+
+
+    // =========================================
+// CTA
+// =========================================
+
+ctx.fillStyle =
+    "#8d3c68";
+
+ctx.font =
+    "bold 42px Arial";
+
+ctx.fillText(
+    "👀 ¿Será verdad?",
+    540,
+    1585
+);
+
+
+ctx.fillStyle =
+    "#555555";
+
+ctx.font =
+    "bold 34px Arial";
+
+ctx.fillText(
+    "Haz tu propio test",
+    540,
+    1645
+);
+
+
+// =========================================
+// ENLACE
+// =========================================
+
+ctx.fillStyle =
+    "#d63384";
+
+ctx.font =
+    "bold 32px Arial";
+
+ctx.fillText(
+    "byloredev.github.io/compatibles",
+    540,
+    1715
+);
+
+
+// =========================================
+// MARCA
+// =========================================
+
+ctx.fillStyle =
+    "#777777";
+
+ctx.font =
+    "bold 30px Arial";
+
+ctx.fillText(
+    "♡ by LoreDev",
+    540,
+    1810
+);
+
+    // =========================================
+    // CONVERTIR A ARCHIVO
+    // =========================================
+
+    return new Promise(
+        (resolve) => {
+
+            canvas.toBlob(
+                (blob) => {
+
+                    resolve(blob);
+
+                },
+                "image/png"
+            );
+
+        }
+    );
+}
+
+
+// =========================================
+// TEXTO ENVUELTO
+// =========================================
+
+function drawWrappedText(
+    ctx,
+    text,
+    x,
+    y,
+    maxWidth,
+    lineHeight
+) {
+
+    const words =
+        text.split(" ");
+
+    let line = "";
+
+    for (
+        let i = 0;
+        i < words.length;
+        i++
+    ) {
+
+        const testLine =
+            line +
+            words[i] +
+            " ";
+
+        const metrics =
+            ctx.measureText(
+                testLine
+            );
+
+        if (
+            metrics.width >
+                maxWidth &&
+            i > 0
+        ) {
+
+            ctx.fillText(
+                line,
+                x,
+                y
+            );
+
+            line =
+                words[i] + " ";
+
+            y += lineHeight;
+
+        } else {
+
+            line =
+                testLine;
+
+        }
+
+    }
+
+    ctx.fillText(
+        line,
+        x,
+        y
+    );
+}
+
+
+// =========================================
+// MÉTRICA
+// =========================================
+
+function drawMetric(
+    ctx,
+    emoji,
+    label,
+    value,
+    x,
+    y
+) {
+
+    ctx.fillStyle =
+        "#ffffff";
+
+    ctx.beginPath();
+
+    ctx.roundRect(
+        180,
+        y - 50,
+        720,
+        90,
+        30
+    );
+
+    ctx.fill();
+
+
+    ctx.fillStyle =
+        "#444444";
+
+    ctx.font =
+        "bold 32px Arial";
+
+    ctx.textAlign =
+        "left";
+
+    ctx.fillText(
+        `${emoji} ${label}`,
+        230,
+        y + 12
+    );
+
+
+    ctx.textAlign =
+        "right";
+
+    ctx.fillStyle =
+        "#d63384";
+
+    ctx.fillText(
+        `${value}%`,
+        850,
+        y + 12
+    );
+
+
+    ctx.textAlign =
+        "center";
+}
+
+// =========================================
+// COMPARTIR RESULTADO COMO IMAGEN
 // =========================================
 
 shareBtn.addEventListener(
     "click",
     async () => {
 
-        const name1 = name1Input.value.trim();
-        const name2 = name2Input.value.trim();
+        const name1 =
+            name1Input.value.trim();
 
-        const score = compatibilityScore.textContent;
+        const name2 =
+            name2Input.value.trim();
 
-        // Crear enlace del resultado
+        const results =
+            calculateCompatibility(
+                name1,
+                name2
+            );
+
+        // =========================================
+        // ENLACE EXACTO DEL RESULTADO
+        // =========================================
+
         const resultUrl =
             `${window.location.origin}${window.location.pathname}` +
             `?a=${encodeURIComponent(name1)}` +
             `&b=${encodeURIComponent(name2)}`;
 
+        // =========================================
+        // TEXTO QUE ACOMPAÑA LA IMAGEN
+        // =========================================
+
         const shareText =
-            `💕 ${name1} ❤️ ${name2}\n\n` +
-            `Tenemos ${score} de compatibilidad 💘\n\n` +
-            `¿Qué tan compatibles son ustedes? 👀\n` +
-            `Haz tu test aquí:`;
+            `👀 ¿Tú cuánto sacarías?\n` +
+            `Haz tu test aquí:\n` +
+            `${resultUrl}`;
 
-        // =========================================
-        // COMPARTIR NATIVO DEL CELULAR
-        // =========================================
+        shareBtn.textContent =
+            "🖼️ CREANDO IMAGEN...";
 
-        if (navigator.share) {
+        shareBtn.disabled = true;
 
-            try {
+        try {
+
+            // =========================================
+            // GENERAR IMAGEN
+            // =========================================
+
+            const blob =
+                await generateResultImage(
+                    name1,
+                    name2,
+                    results
+                );
+
+            const file =
+                new File(
+                    [blob],
+                    "compatibles-resultado.png",
+                    {
+                        type: "image/png"
+                    }
+                );
+
+            // =========================================
+            // COMPARTIR IMAGEN + TEXTO + ENLACE
+            // =========================================
+
+            if (
+                navigator.share &&
+                navigator.canShare &&
+                navigator.canShare({
+                    files: [file]
+                })
+            ) {
 
                 await navigator.share({
-                    title: "Compatibles 💘",
-                    text: shareText,
-                    url: resultUrl
+
+                    title:
+                        "Compatibles 💘",
+
+                    text:
+                        shareText,
+
+                    files:
+                        [file]
+
                 });
 
-            } catch (error) {
+            } else {
 
-                console.log("Compartir cancelado");
+                // =========================================
+                // SI EL CELULAR NO SOPORTA COMPARTIR IMAGEN
+                // =========================================
 
-            }
+                const imageUrl =
+                    URL.createObjectURL(blob);
 
-        } else {
+                const link =
+                    document.createElement("a");
 
-            // =========================================
-            // COPIAR ENLACE
-            // =========================================
+                link.href =
+                    imageUrl;
 
-            try {
+                link.download =
+                    "compatibles-resultado.png";
 
-                await navigator.clipboard.writeText(
-                    `${shareText}\n${resultUrl}`
+                document.body.appendChild(link);
+
+                link.click();
+
+                link.remove();
+
+                URL.revokeObjectURL(
+                    imageUrl
                 );
 
-                shareBtn.textContent =
-                    "✅ ¡ENLACE COPIADO!";
-
-                setTimeout(() => {
-
-                    shareBtn.textContent =
-                        "📸 COMPARTIR MI RESULTADO";
-
-                }, 2000);
-
-            } catch (error) {
+                // Copiar también el texto + enlace
+                await navigator.clipboard.writeText(
+                    shareText
+                );
 
                 alert(
-                    `Copia este enlace y compártelo 💕\n\n${resultUrl}`
+                    "🖼️ ¡Imagen guardada!\n\n" +
+                    "También copiamos el texto y enlace para que puedas pegarlo al publicar 💕"
                 );
-
             }
+
+        } catch (error) {
+
+            console.log(
+                "Compartir cancelado:",
+                error
+            );
+
+        } finally {
+
+            shareBtn.disabled =
+                false;
+
+            shareBtn.textContent =
+                "📸 COMPARTIR MI RESULTADO";
 
         }
 
