@@ -694,74 +694,64 @@ againBtn.addEventListener(
 
 
 // =========================================
-// COMPARTIR
+// COMPARTIR RESULTADO
 // =========================================
 
 shareBtn.addEventListener(
     "click",
     async () => {
 
-        const name1 =
-            name1Input.value.trim();
+        const name1 = name1Input.value.trim();
+        const name2 = name2Input.value.trim();
 
-        const name2 =
-            name2Input.value.trim();
+        const score = compatibilityScore.textContent;
 
-
-        const score =
-            compatibilityScore.textContent;
-
+        // Crear enlace del resultado
+        const resultUrl =
+            `${window.location.origin}${window.location.pathname}` +
+            `?a=${encodeURIComponent(name1)}` +
+            `&b=${encodeURIComponent(name2)}`;
 
         const shareText =
             `💕 ${name1} ❤️ ${name2}\n\n` +
             `Tenemos ${score} de compatibilidad 💘\n\n` +
-            `¿Qué tan compatibles son ustedes? 👀`;
+            `¿Qué tan compatibles son ustedes? 👀\n` +
+            `Haz tu test aquí:`;
 
+        // =========================================
+        // COMPARTIR NATIVO DEL CELULAR
+        // =========================================
 
-        // Compartir desde celulares
-
-        if (
-            navigator.share
-        ) {
+        if (navigator.share) {
 
             try {
 
                 await navigator.share({
-
-                    title:
-                        "¿Qué tan compatibles somos? 💘",
-
-                    text:
-                        shareText,
-
-                    url:
-                        window.location.href
-
+                    title: "Compatibles 💘",
+                    text: shareText,
+                    url: resultUrl
                 });
 
             } catch (error) {
 
-                console.log(
-                    "Compartir cancelado"
-                );
+                console.log("Compartir cancelado");
 
             }
 
         } else {
 
-            // Para navegadores sin Web Share
+            // =========================================
+            // COPIAR ENLACE
+            // =========================================
 
             try {
 
                 await navigator.clipboard.writeText(
-                    shareText +
-                    "\n" +
-                    window.location.href
+                    `${shareText}\n${resultUrl}`
                 );
 
-
                 shareBtn.textContent =
-                    "✅ ¡COPIADO!";
+                    "✅ ¡ENLACE COPIADO!";
 
                 setTimeout(() => {
 
@@ -773,7 +763,7 @@ shareBtn.addEventListener(
             } catch (error) {
 
                 alert(
-                    "Copia el resultado y compártelo con tu crush 💕"
+                    `Copia este enlace y compártelo 💕\n\n${resultUrl}`
                 );
 
             }
@@ -814,3 +804,32 @@ name2Input.addEventListener(
 
     }
 );
+
+// =========================================
+// CARGAR RESULTADO DESDE EL ENLACE
+// =========================================
+
+function loadSharedResult() {
+
+    const params = new URLSearchParams(window.location.search);
+
+    const name1 = params.get("a");
+    const name2 = params.get("b");
+
+    // Si no hay nombres en la URL, no hacemos nada
+    if (!name1 || !name2) {
+        return;
+    }
+
+    // Colocar los nombres en los inputs
+    name1Input.value = name1;
+    name2Input.value = name2;
+
+    // Calcular el mismo resultado
+    const results = calculateCompatibility(name1, name2);
+
+    // Mostrar directamente el resultado
+    showResult(name1, name2, results);
+}
+// Revisar si entramos mediante un enlace compartido
+loadSharedResult();
