@@ -11,9 +11,6 @@ const SUPABASE_URL = "https://cukldolycpihymfurqvp.supabase.co";
 
 const SUPABASE_KEY = "sb_publishable_3VjVpPcgHCRgByTuxhOWvw_s5YDu8Nu";
 
-// ================================
-// CONTADORES SUPABASE
-// ================================
 
 // ================================
 // CONTADORES SUPABASE
@@ -649,22 +646,7 @@ calculateBtn.addEventListener(
                 results
             );
 
-        });
-
-
-        // Contador provisional
-
-        const currentTests =
-            parseInt(
-                testsCounter.textContent
-                    .replace(/,/g, "")
-            ) || 0;
-
-
-        testsCounter.textContent =
-            (
-                currentTests + 1
-            ).toLocaleString("en-US");
+        }); 
 
     }
 );
